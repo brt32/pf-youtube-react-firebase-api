@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
+import WatchScreen from "./screens/watchScreen/WatchScreen";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -53,6 +54,12 @@ const App = () => {
       <Route path="/search">
         <Layout>
           <h1> Search Results </h1>
+        </Layout>
+      </Route>
+
+      <Route path="/watch/:id">
+        <Layout>
+          <WatchScreen />
         </Layout>
       </Route>
 

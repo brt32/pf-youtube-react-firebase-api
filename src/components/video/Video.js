@@ -5,6 +5,8 @@ import { AiFillEye } from "react-icons/ai";
 import request from "../../api";
 import moment from "moment";
 import numeral from "numeral";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useHistory } from "react-router-dom";
 
 const Video = ({ video }) => {
   const {
@@ -26,6 +28,8 @@ const Video = ({ video }) => {
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
 
   const _videoId = id?.videoId || id;
+
+  const history = useHistory();
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -58,10 +62,15 @@ const Video = ({ video }) => {
     get_channel_icon();
   }, [channelId]);
 
+  const handleVideoClick = () => {
+    history.push(`/watch/${_videoId}`);
+  };
+
   return (
-    <div className="video">
+    <div className="video" onClick={handleVideoClick}>
       <div className="video__top">
-        <img src={medium.url} alt="" />
+        {/* <img src={medium.url} alt="" /> */}
+        <LazyLoadImage src={medium.url} effect="blur" />
         <span className="video__top__duration">{_duration}</span>
       </div>
       <div className="video__title">{title}</div>
@@ -72,7 +81,8 @@ const Video = ({ video }) => {
         <span>{moment(publishedAt).fromNow()}</span>
       </div>
       <div className="video__channel">
-        <img src={channelIcon?.url} alt="" />
+        {/* <img src={channelIcon?.url} alt="" /> */}
+        <LazyLoadImage src={channelIcon?.url} effect="blur" />
         <p>{channelTitle}</p>
       </div>
     </div>

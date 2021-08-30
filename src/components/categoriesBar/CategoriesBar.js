@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getVideosByCategory } from "../../redux/actions/videos.action";
+import {
+  getVideosByCategory,
+  getPopularVideos,
+} from "../../redux/actions/videos.action";
 import "./_categoriesBar.scss";
 
 const keywords = [
@@ -30,7 +33,11 @@ const CategoriesBar = () => {
 
   const handleClick = (value) => {
     setActiveElement(value);
-    dispatch(getVideosByCategory(value));
+    if (value === "All") {
+      dispatch(getPopularVideos());
+    } else {
+      dispatch(getVideosByCategory(value));
+    }
   };
 
   return (
@@ -38,7 +45,7 @@ const CategoriesBar = () => {
       {keywords.map((value, i) => (
         <span
           onClick={() => handleClick(value)}
-          key={i}
+          key={Math.random()}
           className={activeElement === value ? "active" : ""}
         >
           {value}
