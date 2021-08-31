@@ -4,9 +4,13 @@ import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
+import Footer from "./components/footer/Footer";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import WatchScreen from "./screens/watchScreen/WatchScreen";
+import SearchScreen from "./screens/searchScreen/SearchScreen";
+import SubscriptionsScreen from "./screens/subscriptionsScreen/SubscriptionsScreen";
+import ChannelScreen from "./screens/channelScreen/ChannelScreen";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -25,6 +29,7 @@ const Layout = ({ children }) => {
           {children}
         </Container>
       </div>
+      <Footer />
     </>
   );
 };
@@ -51,15 +56,27 @@ const App = () => {
         <LoginScreen />
       </Route>
 
-      <Route path="/search">
+      <Route path="/search/:query">
         <Layout>
-          <h1> Search Results </h1>
+          <SearchScreen />
         </Layout>
       </Route>
 
       <Route path="/watch/:id">
         <Layout>
           <WatchScreen />
+        </Layout>
+      </Route>
+
+      <Route path="/feed/subscriptions">
+        <Layout>
+          <SubscriptionsScreen />
+        </Layout>
+      </Route>
+
+      <Route path="/channel/:channelId">
+        <Layout>
+          <ChannelScreen />
         </Layout>
       </Route>
 
